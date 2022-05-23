@@ -18,7 +18,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Prueba-DB</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="./css/styles.css">
     </head>
 
     <body>
@@ -50,9 +50,8 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 order-md-1">
-                    <?php foreach ($resultado as $row) { ?>
-                    <div class="col">
-                        <div class="card shadow-sm">
+                     <?php foreach ($resultado as $row) { ?>
+                        <div id="img-comics" class="card shadow-sm">
                             
                             <?php 
                                 $id = $row['ID_Comics'];
@@ -61,22 +60,41 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
                                     $imagen = "img/no-foto.jpg"
                                     ]
                             ?>
-                            <img src="<?php echo $imagen; ?>">
+                            <img id="img2" src="<?php echo $imagen; ?>">
                         </div>
 
                     </div>
-                    <div class="col-md-6 order-md-2">
+                    <div class="col-md-6 order-md-2 padding-div">
                         <h2><?php echo $row['Titulo_Comic']; ?></h2>
                         <h4><?php echo MONEDA . $row['precio_comic']; ?></h4>
                         <p class="lead">
                             <?php echo $row['Descripcion_Comic']; ?>
                         </p>
+                        <div class="d-grid gap-3 col-10 mx-auto">
+                            <button class="btn btn-primary" type="button">Comprar ahora</button>
+                            <button class="btn btn-outline-primary" type="button" onclick="addProducto(<?php echo $id; ?>)">Agregar al carrito</button>
+
+                        </div>
                     </div>
                 </div>
                 <?php } ?>
             </div>
 
         </main>
+        <script>
+            function addProducto(id){
+                let url = 'clases/carrito.php';
+                let formData = new FormData()
+                formData.append('id', $id)
+
+                fetch(url,{
+                    method: 'POST',
+                    body: formData,
+                    mode: 'cros' 
+                })
+            }
+        </script>
     </body>
 
     </html>
+    
