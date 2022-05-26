@@ -41,7 +41,9 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
                                 <a href="#" class="nav-link ">Contacto</a>
                             </li>
                         </ul>
-                        <a href="carrito.php" class="btn btn-primary">Carrito</a>
+                        <a href="./clases/carrito.php" class="btn btn-primary">
+                            Carrito <span id="num_cart" class="badge bg-secondary"></span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -72,7 +74,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
                         </p>
                         <div class="d-grid gap-3 col-10 mx-auto">
                             <button class="btn btn-primary" type="button">Comprar ahora</button>
-                            <button class="btn btn-outline-primary" type="button" onclick="addProducto(<?php echo $id; ?>)">Agregar al carrito</button>
+                            <button class="btn btn-outline-primary agregar-carrito" type="button">Agregar al carrito</button>
 
                         </div>
                     </div>
@@ -81,19 +83,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
             </div>
 
         </main>
-        <script>
-            function addProducto(id){
-                let url = 'clases/carrito.php';
-                let formData = new FormData()
-                formData.append('id', $id)
-
-                fetch(url,{
-                    method: 'POST',
-                    body: formData,
-                    mode: 'cros' 
-                })
-            }
-        </script>
+        
     </body>
 
     </html>
